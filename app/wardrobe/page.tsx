@@ -9,11 +9,8 @@ type Clothing = {
   color: string;
 };
 
-export default function OutfitsPage() {
+export default function WardrobePage() {
   const [clothes, setClothes] = useState<Clothing[]>([]);
-  const [selectedTop, setSelectedTop] = useState<Clothing | null>(null);
-  const [selectedBottom, setSelectedBottom] = useState<Clothing | null>(null);
-  const [selectedShoes, setSelectedShoes] = useState<Clothing | null>(null);
 
   useEffect(() => {
     const savedClothes = JSON.parse(
@@ -23,146 +20,74 @@ export default function OutfitsPage() {
     setClothes(savedClothes);
   }, []);
 
-  const tops = clothes.filter((item) => item.category === "Top");
-  const bottoms = clothes.filter((item) => item.category === "Bottom");
-  const shoes = clothes.filter((item) => item.category === "Shoes");
+  function deleteClothing(index: number) {
+    const updatedClothes = clothes.filter((_, i) => i !== index);
+
+    localStorage.setItem("clothes", JSON.stringify(updatedClothes));
+    setClothes(updatedClothes);
+  }
 
   return (
     <main className="min-h-screen bg-[#F8F5FC] p-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-auto max-w-6xl">
 
         <h1 className="text-4xl font-extrabold text-purple-950">
-          Outfit Builder 👗
+          My Wardrobe 👗
         </h1>
 
-        <p className="text-gray-500 mt-2">
-          Mix and match clothes from your wardrobe.
+        <p className="mt-2 text-gray-500">
+          All your clothes in one place.
         </p>
 
-        {/* TOPS */}
-        <section className="mt-8">
-          <h2 className="text-2xl font-bold text-purple-900">
-            Select Top 👚
-          </h2>
+        {clothes.length === 0 ? (
+          <div className="mt-10 rounded-3xl bg-white p-10 text-center shadow-sm border border-purple-100">
+            <h2 className="text-2xl font-bold text-purple-900">
+              Your wardrobe is empty
+            </h2>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-            {tops.map((item, index) => (
-              <button
+            <p className="mt-2 text-gray-500">
+              Add some clothes to start building your wardrobe.
+            </p>
+          </div>
+        ) : (
+          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4">
+
+            {clothes.map((item, index) => (
+              <div
                 key={index}
-                onClick={() => setSelectedTop(item)}
-                className="bg-white rounded-2xl p-3 shadow-sm border border-purple-100 hover:shadow-lg transition"
+                className="overflow-hidden rounded-2xl bg-white shadow-sm border border-purple-100"
               >
                 <img
                   src={item.photo}
                   alt={item.name}
-                  className="w-full h-40 object-cover rounded-xl"
+                  className="h-56 w-full object-cover"
                 />
-                <p className="font-semibold mt-2 text-purple-950">
-                  {item.name}
-                </p>
-              </button>
-            ))}
-          </div>
-        </section>
 
-        {/* BOTTOMS */}
-        <section className="mt-8">
-          <h2 className="text-2xl font-bold text-purple-900">
-            Select Bottom 👖
-          </h2>
+                <div className="p-4">
+                  <h3 className="font-bold text-purple-950">
+                    {item.name}
+                  </h3>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-            {bottoms.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedBottom(item)}
-                className="bg-white rounded-2xl p-3 shadow-sm border border-purple-100 hover:shadow-lg transition"
-              >
-                <img
-                  src={item.photo}
-                  alt={item.name}
-                  className="w-full h-40 object-cover rounded-xl"
-                />
-                <p className="font-semibold mt-2 text-purple-950">
-                  {item.name}
-                </p>
-              </button>
-            ))}
-          </div>
-        </section>
+                  <p className="mt-1 text-sm text-gray-500">
+                    {item.category}
+                  </p>
 
-        {/* SHOES */}
-        <section className="mt-8">
-          <h2 className="text-2xl font-bold text-purple-900">
-            Select Shoes 👟
-          </h2>
+                  <p className="text-sm text-gray-500">
+                    {item.color}
+                  </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-            {shoes.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedShoes(item)}
-                className="bg-white rounded-2xl p-3 shadow-sm border border-purple-100 hover:shadow-lg transition"
-              >
-                <img
-                  src={item.photo}
-                  alt={item.name}
-                  className="w-full h-40 object-cover rounded-xl"
-                />
-                <p className="font-semibold mt-2 text-purple-950">
-                  {item.name}
-                </p>
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* PREVIEW */}
-        <section className="mt-10 bg-white rounded-3xl p-6 shadow-sm border border-purple-100">
-          <h2 className="text-2xl font-bold text-purple-900">
-            Outfit Preview ✨
-          </h2>
-
-          <div className="grid grid-cols-3 gap-4 mt-6">
-
-            {selectedTop ? (
-              <img
-                src={selectedTop.photo}
-                alt={selectedTop.name}
-                className="w-full h-64 object-cover rounded-2xl"
-              />
-            ) : (
-              <div className="h-64 bg-purple-50 rounded-2xl flex items-center justify-center text-gray-400">
-                Top
+                  <button
+                    onClick={() => deleteClothing(index)}
+                    className="mt-3 w-full rounded-xl border border-red-200 p-2 text-sm font-semibold text-red-600 hover:bg-red-50"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            )}
-
-            {selectedBottom ? (
-              <img
-                src={selectedBottom.photo}
-                alt={selectedBottom.name}
-                className="w-full h-64 object-cover rounded-2xl"
-              />
-            ) : (
-              <div className="h-64 bg-purple-50 rounded-2xl flex items-center justify-center text-gray-400">
-                Bottom
-              </div>
-            )}
-
-            {selectedShoes ? (
-              <img
-                src={selectedShoes.photo}
-                alt={selectedShoes.name}
-                className="w-full h-64 object-cover rounded-2xl"
-              />
-            ) : (
-              <div className="h-64 bg-purple-50 rounded-2xl flex items-center justify-center text-gray-400">
-                Shoes
-              </div>
-            )}
+            ))}
 
           </div>
-        </section>
+        )}
 
       </div>
     </main>
