@@ -8,7 +8,12 @@ export default function Home() {
 
         <p className="mt-4 text-lg text-gray-600">
           Your digital wardrobe.
-        </p>
+        </p><a
+  href="/wardrobe"
+  className="mt-6 inline-block rounded-full bg-purple-600 px-6 py-3 text-white"
+>
+  Open My Wardrobe
+</a>
       </div>
     </main>
   );
