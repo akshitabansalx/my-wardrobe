@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -108,29 +109,82 @@ export default function OutfitsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-purple-50 p-8">
+    <main className="min-h-screen bg-[#F8F5FC] px-6 py-8 text-purple-950">
       <div className="mx-auto max-w-6xl">
 
-        <h1 className="text-4xl font-bold text-purple-800">
-          Outfit Builder 👗
-        </h1>
+        {/* Header */}
+        <header className="flex flex-wrap items-center justify-between gap-4">
+          <a
+            href="/"
+            className="text-2xl font-extrabold tracking-tight"
+          >
+            vestia<span className="text-purple-500">.</span>
+          </a>
 
-        <p className="mt-2 text-gray-600">
-          Create an outfit from your wardrobe.
-        </p>
+          <a
+            href="/wardrobe"
+            className="rounded-full border border-purple-200 bg-white px-5 py-2.5 text-sm font-semibold text-purple-900 shadow-sm hover:bg-purple-50"
+          >
+            👗 My Wardrobe
+          </a>
+        </header>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        {/* Heading */}
+        <div className="mt-10">
+          <div className="inline-block rounded-full bg-purple-100 px-4 py-2 text-sm font-semibold text-purple-700">
+            ✨ Style studio
+          </div>
+
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+            Outfit Builder
+          </h1>
+
+          <p className="mt-2 text-gray-500">
+            Mix and match your wardrobe to create your perfect outfit.
+          </p>
+        </div>
+
+        {/* Navigation */}
+        <div className="mt-7 flex flex-wrap gap-3">
+          <a
+            href="/wardrobe"
+            className="rounded-full border border-purple-200 bg-white px-5 py-3 text-sm font-semibold text-purple-900 shadow-sm hover:bg-purple-50"
+          >
+            👗 Wardrobe
+          </a>
+
+          <a
+            href="/outfits"
+            className="rounded-full bg-purple-600 px-5 py-3 text-sm font-semibold text-white shadow-sm"
+          >
+            ✨ Outfit Builder
+          </a>
+
+          <a
+            href="/calendar"
+            className="rounded-full border border-purple-200 bg-white px-5 py-3 text-sm font-semibold text-purple-900 shadow-sm hover:bg-purple-50"
+          >
+            📅 Calendar
+          </a>
+        </div>
+
+        {/* Builder */}
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
 
           {/* Choose Clothes */}
-          <section className="rounded-2xl bg-white p-6 shadow">
+          <section className="rounded-3xl border border-purple-100 bg-white p-6 shadow-sm sm:p-8">
 
-            <h2 className="text-xl font-semibold text-purple-700">
-              Choose Clothes
+            <h2 className="text-2xl font-bold text-purple-950">
+              Choose your pieces
             </h2>
 
+            <p className="mt-1 text-sm text-gray-500">
+              Select one item from each category.
+            </p>
+
             {/* Tops */}
-            <div className="mt-6">
-              <h3 className="mb-3 font-semibold">
+            <div className="mt-7">
+              <h3 className="mb-3 font-bold text-purple-900">
                 👚 Tops
               </h3>
 
@@ -139,31 +193,41 @@ export default function OutfitsPage() {
                   <button
                     key={index}
                     onClick={() => setSelectedTop(item)}
-                    className="rounded-xl border p-2 hover:bg-purple-50"
+                    className={`overflow-hidden rounded-2xl border-2 bg-white p-2 text-left transition hover:-translate-y-1 hover:shadow-md ${
+                      selectedTop === item
+                        ? "border-purple-600 bg-purple-50"
+                        : "border-purple-100"
+                    }`}
                   >
                     <img
                       src={item.photo}
                       alt={item.name}
-                      className="h-32 w-full rounded-lg object-cover"
+                      className="h-32 w-full rounded-xl object-cover"
                     />
 
-                    <p className="mt-2 text-sm font-medium">
-                      {item.name}
+                    <p className="mt-2 truncate text-sm font-semibold text-purple-950">
+                      {item.name || "Unnamed item"}
                     </p>
+
+                    {selectedTop === item && (
+                      <p className="mt-1 text-xs font-semibold text-purple-600">
+                        ✓ Selected
+                      </p>
+                    )}
                   </button>
                 ))}
               </div>
 
               {tops.length === 0 && (
-                <p className="text-sm text-gray-500">
-                  No tops saved yet.
-                </p>
+                <div className="rounded-2xl bg-purple-50 p-4 text-sm text-gray-500">
+                  No tops saved yet. Add a top to your wardrobe first.
+                </div>
               )}
             </div>
 
             {/* Bottoms */}
-            <div className="mt-6">
-              <h3 className="mb-3 font-semibold">
+            <div className="mt-7">
+              <h3 className="mb-3 font-bold text-purple-900">
                 👖 Bottoms
               </h3>
 
@@ -172,31 +236,41 @@ export default function OutfitsPage() {
                   <button
                     key={index}
                     onClick={() => setSelectedBottom(item)}
-                    className="rounded-xl border p-2 hover:bg-purple-50"
+                    className={`overflow-hidden rounded-2xl border-2 bg-white p-2 text-left transition hover:-translate-y-1 hover:shadow-md ${
+                      selectedBottom === item
+                        ? "border-purple-600 bg-purple-50"
+                        : "border-purple-100"
+                    }`}
                   >
                     <img
                       src={item.photo}
                       alt={item.name}
-                      className="h-32 w-full rounded-lg object-cover"
+                      className="h-32 w-full rounded-xl object-cover"
                     />
 
-                    <p className="mt-2 text-sm font-medium">
-                      {item.name}
+                    <p className="mt-2 truncate text-sm font-semibold text-purple-950">
+                      {item.name || "Unnamed item"}
                     </p>
+
+                    {selectedBottom === item && (
+                      <p className="mt-1 text-xs font-semibold text-purple-600">
+                        ✓ Selected
+                      </p>
+                    )}
                   </button>
                 ))}
               </div>
 
               {bottoms.length === 0 && (
-                <p className="text-sm text-gray-500">
-                  No bottoms saved yet.
-                </p>
+                <div className="rounded-2xl bg-purple-50 p-4 text-sm text-gray-500">
+                  No bottoms saved yet. Add a bottom to your wardrobe first.
+                </div>
               )}
             </div>
 
             {/* Shoes */}
-            <div className="mt-6">
-              <h3 className="mb-3 font-semibold">
+            <div className="mt-7">
+              <h3 className="mb-3 font-bold text-purple-900">
                 👟 Shoes
               </h3>
 
@@ -205,90 +279,123 @@ export default function OutfitsPage() {
                   <button
                     key={index}
                     onClick={() => setSelectedShoes(item)}
-                    className="rounded-xl border p-2 hover:bg-purple-50"
+                    className={`overflow-hidden rounded-2xl border-2 bg-white p-2 text-left transition hover:-translate-y-1 hover:shadow-md ${
+                      selectedShoes === item
+                        ? "border-purple-600 bg-purple-50"
+                        : "border-purple-100"
+                    }`}
                   >
                     <img
                       src={item.photo}
                       alt={item.name}
-                      className="h-32 w-full rounded-lg object-cover"
+                      className="h-32 w-full rounded-xl object-cover"
                     />
 
-                    <p className="mt-2 text-sm font-medium">
-                      {item.name}
+                    <p className="mt-2 truncate text-sm font-semibold text-purple-950">
+                      {item.name || "Unnamed item"}
                     </p>
+
+                    {selectedShoes === item && (
+                      <p className="mt-1 text-xs font-semibold text-purple-600">
+                        ✓ Selected
+                      </p>
+                    )}
                   </button>
                 ))}
               </div>
 
               {shoes.length === 0 && (
-                <p className="text-sm text-gray-500">
-                  No shoes saved yet.
-                </p>
+                <div className="rounded-2xl bg-purple-50 p-4 text-sm text-gray-500">
+                  No shoes saved yet. Add shoes to your wardrobe first.
+                </div>
               )}
             </div>
 
           </section>
 
-          {/* Outfit Preview */}
-          <section className="rounded-2xl bg-white p-6 shadow">
+          {/* Preview */}
+          <section className="rounded-3xl border border-purple-100 bg-white p-6 shadow-sm sm:p-8">
 
-            <h2 className="text-xl font-semibold text-purple-700">
-              Outfit Preview
-            </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-purple-950">
+                  Outfit Preview
+                </h2>
 
-            <div className="mt-6 flex min-h-72 flex-col items-center justify-center gap-3 rounded-xl bg-purple-50 p-4">
+                <p className="mt-1 text-sm text-gray-500">
+                  See your look come together.
+                </p>
+              </div>
+
+              <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700">
+                Preview
+              </span>
+            </div>
+
+            <div className="mt-6 flex min-h-[430px] flex-col items-center justify-center gap-3 rounded-3xl border border-purple-100 bg-[#F8F5FC] p-5">
 
               {selectedTop ? (
                 <img
                   src={selectedTop.photo}
                   alt={selectedTop.name}
-                  className="h-32 w-32 rounded-xl object-cover"
+                  className="h-32 w-32 rounded-2xl object-cover shadow-sm"
                 />
               ) : (
-                <p className="text-gray-500">
-                  👚 Select a top
-                </p>
+                <div className="flex h-32 w-32 items-center justify-center rounded-2xl border-2 border-dashed border-purple-200 bg-white text-center text-xs text-gray-400">
+                  👚
+                  <br />
+                  Select top
+                </div>
               )}
 
               {selectedBottom ? (
                 <img
                   src={selectedBottom.photo}
                   alt={selectedBottom.name}
-                  className="h-32 w-32 rounded-xl object-cover"
+                  className="h-32 w-32 rounded-2xl object-cover shadow-sm"
                 />
               ) : (
-                <p className="text-gray-500">
-                  👖 Select a bottom
-                </p>
+                <div className="flex h-32 w-32 items-center justify-center rounded-2xl border-2 border-dashed border-purple-200 bg-white text-center text-xs text-gray-400">
+                  👖
+                  <br />
+                  Select bottom
+                </div>
               )}
 
               {selectedShoes ? (
                 <img
                   src={selectedShoes.photo}
                   alt={selectedShoes.name}
-                  className="h-24 w-24 rounded-xl object-cover"
+                  className="h-24 w-24 rounded-2xl object-cover shadow-sm"
                 />
               ) : (
-                <p className="text-gray-500">
-                  👟 Select shoes
-                </p>
+                <div className="flex h-24 w-24 items-center justify-center rounded-2xl border-2 border-dashed border-purple-200 bg-white text-center text-xs text-gray-400">
+                  👟
+                  <br />
+                  Shoes
+                </div>
               )}
 
             </div>
 
+            {/* Outfit name */}
+            <label className="mt-6 block text-sm font-semibold text-purple-950">
+              Outfit name
+            </label>
+
             <input
               type="text"
-              placeholder="Give your outfit a name"
+              placeholder="e.g. Casual Friday"
               value={outfitName}
               onChange={(e) => setOutfitName(e.target.value)}
-              className="mt-5 w-full rounded-xl border p-3 outline-none focus:border-purple-500"
+              className="mt-2 w-full rounded-2xl border border-purple-100 bg-purple-50/40 p-3.5 outline-none transition focus:border-purple-400 focus:ring-2 focus:ring-purple-100"
             />
 
             <button
               onClick={saveOutfit}
-              className="mt-4 w-full rounded-xl bg-purple-600 p-3 font-semibold text-white hover:bg-purple-700"
+              className="mt-4 w-full rounded-full bg-purple-600 py-3.5 font-semibold text-white shadow-md transition hover:bg-purple-700"
             >
-              Save Outfit
+              Save Outfit ✨
             </button>
 
           </section>
@@ -296,26 +403,40 @@ export default function OutfitsPage() {
         </div>
 
         {/* Saved Outfits */}
-        <section className="mt-8 rounded-2xl bg-white p-6 shadow">
+        <section className="mt-8 rounded-3xl border border-purple-100 bg-white p-6 shadow-sm sm:p-8">
 
-          <h2 className="text-2xl font-semibold text-purple-700">
-            Saved Outfits ✨
-          </h2>
+          <div>
+            <h2 className="text-2xl font-bold text-purple-950">
+              Saved Outfits ✨
+            </h2>
+
+            <p className="mt-1 text-sm text-gray-500">
+              Your favorite looks, ready to revisit.
+            </p>
+          </div>
 
           {savedOutfits.length === 0 ? (
-            <p className="mt-4 text-gray-500">
-              No saved outfits yet.
-            </p>
+            <div className="mt-6 rounded-2xl bg-purple-50 p-8 text-center">
+              <div className="text-4xl">✨</div>
+
+              <p className="mt-3 font-semibold text-purple-900">
+                No saved outfits yet
+              </p>
+
+              <p className="mt-1 text-sm text-gray-500">
+                Create your first outfit above.
+              </p>
+            </div>
           ) : (
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
 
               {savedOutfits.map((outfit) => (
                 <div
                   key={outfit.id}
-                  className="rounded-xl border p-4"
+                  className="rounded-3xl border border-purple-100 bg-[#F8F5FC] p-5"
                 >
 
-                  <h3 className="text-lg font-semibold text-purple-800">
+                  <h3 className="text-lg font-bold text-purple-950">
                     {outfit.name}
                   </h3>
 
@@ -324,26 +445,26 @@ export default function OutfitsPage() {
                     <img
                       src={outfit.top.photo}
                       alt={outfit.top.name}
-                      className="h-24 w-24 rounded-lg object-cover"
+                      className="h-24 w-24 rounded-2xl object-cover shadow-sm"
                     />
 
                     <img
                       src={outfit.bottom.photo}
                       alt={outfit.bottom.name}
-                      className="h-24 w-24 rounded-lg object-cover"
+                      className="h-24 w-24 rounded-2xl object-cover shadow-sm"
                     />
 
                     <img
                       src={outfit.shoes.photo}
                       alt={outfit.shoes.name}
-                      className="h-20 w-20 rounded-lg object-cover"
+                      className="h-20 w-20 rounded-2xl object-cover shadow-sm"
                     />
 
                   </div>
 
                   <button
                     onClick={() => deleteOutfit(outfit.id)}
-                    className="mt-4 w-full rounded-xl border border-red-300 p-2 font-semibold text-red-600 hover:bg-red-50"
+                    className="mt-5 w-full rounded-2xl border border-red-200 bg-white py-2.5 text-sm font-semibold text-red-600 transition hover:bg-red-50"
                   >
                     Delete Outfit 🗑️
                   </button>
