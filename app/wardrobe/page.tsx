@@ -9,30 +9,18 @@ type Clothing = {
   color: string;
 };
 
+const categoryOrder = [
+  { key: "Top", label: "Tops", emoji: "👚" },
+  { key: "Bottom", label: "Bottoms", emoji: "👖" },
+  { key: "Dress", label: "Dresses", emoji: "👗" },
+  { key: "Shoes", label: "Shoes", emoji: "👟" },
+  { key: "Other", label: "Other", emoji: "👜" },
+];
+
 export default function WardrobePage() {
   const [clothes, setClothes] = useState<Clothing[]>([]);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState("All");
-
-  const topCount = clothes.filter(
-    (item) => item.category.toLowerCase() === "top"
-  ).length;
-
-  const bottomCount = clothes.filter(
-    (item) => item.category.toLowerCase() === "bottom"
-  ).length;
-
-  const dressCount = clothes.filter(
-    (item) => item.category.toLowerCase() === "dress"
-  ).length;
-
-  const shoesCount = clothes.filter(
-    (item) => item.category.toLowerCase() === "shoes"
-  ).length;
-
-  const otherCount = clothes.filter(
-    (item) => item.category.toLowerCase() === "other"
-  ).length;
 
   useEffect(() => {
     const savedClothes = JSON.parse(
@@ -50,6 +38,13 @@ export default function WardrobePage() {
     setOpenMenu(null);
   }
 
+  const getCategoryItems = (category: string) => {
+    return clothes.filter(
+      (item) =>
+        item.category.toLowerCase() === category.toLowerCase()
+    );
+  };
+
   const filteredClothes =
     activeCategory === "All"
       ? clothes
@@ -58,6 +53,12 @@ export default function WardrobePage() {
             item.category.toLowerCase() ===
             activeCategory.toLowerCase()
         );
+
+  const topCount = getCategoryItems("Top").length;
+  const bottomCount = getCategoryItems("Bottom").length;
+  const dressCount = getCategoryItems("Dress").length;
+  const shoesCount = getCategoryItems("Shoes").length;
+  const otherCount = getCategoryItems("Other").length;
 
   const categories = [
     { name: "All", count: clothes.length },
@@ -69,321 +70,501 @@ export default function WardrobePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#F7F3F0] px-4 py-6 text-[#241F20] sm:px-6 sm:py-8">
-      <div className="mx-auto max-w-6xl">
+    <main
+      onClick={() => setOpenMenu(null)}
+      className="relative min-h-screen overflow-hidden bg-[#F3F2F4] text-[#29272B]"
+    >
+      {/* ================================================== */}
+      {/* SUBTLE GLITTER BACKGROUND */}
+      {/* ================================================== */}
 
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 5% 8%, rgba(151,126,166,0.38) 0 2px, transparent 3px),
+            radial-gradient(circle at 14% 19%, rgba(255,255,255,0.95) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 25% 7%, rgba(151,126,166,0.30) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 37% 17%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+            radial-gradient(circle at 49% 6%, rgba(151,126,166,0.35) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 61% 21%, rgba(255,255,255,0.95) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 73% 9%, rgba(151,126,166,0.35) 0 2px, transparent 3px),
+            radial-gradient(circle at 87% 18%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 96% 7%, rgba(151,126,166,0.30) 0 1.5px, transparent 3px),
+
+            radial-gradient(circle at 8% 42%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 21% 55%, rgba(151,126,166,0.30) 0 2px, transparent 3px),
+            radial-gradient(circle at 34% 39%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 48% 52%, rgba(151,126,166,0.32) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 66% 42%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+            radial-gradient(circle at 79% 57%, rgba(151,126,166,0.32) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 92% 43%, rgba(255,255,255,0.95) 0 1.5px, transparent 3px),
+
+            radial-gradient(circle at 6% 78%, rgba(151,126,166,0.32) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 19% 91%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+            radial-gradient(circle at 33% 76%, rgba(151,126,166,0.30) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 52% 89%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 68% 77%, rgba(151,126,166,0.34) 0 2px, transparent 3px),
+            radial-gradient(circle at 83% 91%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 96% 79%, rgba(151,126,166,0.30) 0 1.5px, transparent 3px)
+          `,
+        }}
+      />
+
+      <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-5 sm:px-6 sm:pt-8">
+
+        {/* ================================================== */}
         {/* HEADER */}
+        {/* ================================================== */}
+
         <header className="flex items-center justify-between">
           <a
             href="/"
-            className="text-2xl font-black tracking-tight"
+            onClick={(e) => e.stopPropagation()}
+            className="text-2xl font-black tracking-[-0.06em] text-[#29272B] sm:text-3xl"
           >
-            vestia<span className="text-[#9B6AA8]">.</span>
+            vestia<span className="text-[#9A86A8]">.</span>
           </a>
 
           <a
             href="/add-clothes"
-            className="rounded-full bg-[#3A3035] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:scale-[1.02]"
+            onClick={(e) => e.stopPropagation()}
+            className="rounded-full bg-[#29272B] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#38343A]"
           >
-            + Add
+            + Add piece
           </a>
         </header>
 
+        {/* ================================================== */}
         {/* TITLE */}
-        <section className="mt-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9B6AA8]">
-            Your closet
+        {/* ================================================== */}
+
+        <section className="mt-9 sm:mt-12">
+          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#8F789F]">
+            Your digital closet
           </p>
 
           <div className="mt-2 flex items-end justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-black tracking-tight sm:text-5xl">
+              <h1 className="text-4xl font-black tracking-[-0.055em] text-[#29272B] sm:text-5xl">
                 My Wardrobe
               </h1>
 
-              <p className="mt-2 text-sm text-[#756C70] sm:text-base">
-                Your pieces. Your style. Your rules.
+              <p className="mt-2 text-sm text-[#777278] sm:text-base">
+                Browse your pieces. Build your style.
               </p>
             </div>
 
             {clothes.length > 0 && (
-              <p className="hidden text-sm font-semibold text-[#756C70] sm:block">
+              <div className="hidden rounded-full border border-[#DEDADF] bg-white/80 px-4 py-2 text-sm font-semibold text-[#4B474D] shadow-sm sm:block">
                 {clothes.length}{" "}
                 {clothes.length === 1 ? "piece" : "pieces"}
-              </p>
+              </div>
             )}
           </div>
         </section>
 
-        {/* STATS */}
+        {/* ================================================== */}
+        {/* CLOSET SUMMARY */}
+        {/* ================================================== */}
+
         {clothes.length > 0 && (
-          <section className="mt-7 flex gap-3 overflow-x-auto pb-1">
-            <div className="min-w-[82px] rounded-2xl border border-[#E5DDE0] bg-white/70 px-4 py-3">
-              <p className="text-lg font-black">
-                {clothes.length}
-              </p>
-              <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#81777B]">
-                Pieces
-              </p>
+          <section className="mt-7 rounded-[1.6rem] border border-[#DFDDE1] bg-white/75 p-4 shadow-[0_8px_30px_rgba(55,48,60,0.04)] backdrop-blur-sm sm:p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#88828A]">
+                  Closet overview
+                </p>
+
+                <p className="mt-1 text-lg font-black tracking-tight text-[#29272B]">
+                  {clothes.length} pieces to style
+                </p>
+              </div>
+
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E9E2ED] text-sm text-[#8F789F]">
+                ✦
+              </div>
             </div>
 
-            <div className="min-w-[82px] rounded-2xl border border-[#E5DDE0] bg-white/70 px-4 py-3">
-              <p className="text-lg font-black">
-                {topCount}
-              </p>
-              <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#81777B]">
-                Tops
-              </p>
-            </div>
-
-            <div className="min-w-[82px] rounded-2xl border border-[#E5DDE0] bg-white/70 px-4 py-3">
-              <p className="text-lg font-black">
-                {bottomCount}
-              </p>
-              <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#81777B]">
-                Bottoms
-              </p>
-            </div>
-
-            <div className="min-w-[82px] rounded-2xl border border-[#E5DDE0] bg-white/70 px-4 py-3">
-              <p className="text-lg font-black">
-                {dressCount}
-              </p>
-              <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#81777B]">
-                Dresses
-              </p>
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+              <SummaryCard label="Tops" count={topCount} />
+              <SummaryCard label="Bottoms" count={bottomCount} />
+              <SummaryCard label="Dresses" count={dressCount} />
+              <SummaryCard label="Shoes" count={shoesCount} />
             </div>
           </section>
         )}
 
-        {/* NAVIGATION */}
+        {/* ================================================== */}
+        {/* APP NAVIGATION */}
+        {/* ================================================== */}
+
         <nav className="mt-7 flex gap-2 overflow-x-auto pb-1">
           <a
             href="/wardrobe"
-            className="shrink-0 rounded-full bg-[#3A3035] px-5 py-2.5 text-sm font-semibold text-white"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full bg-[#29272B] px-5 py-2.5 text-sm font-semibold text-white shadow-sm"
           >
-            👗 Wardrobe
+            Wardrobe
           </a>
 
           <a
             href="/outfits"
-            className="shrink-0 rounded-full border border-[#DED5D8] bg-white px-5 py-2.5 text-sm font-semibold text-[#3A3035] transition hover:bg-[#F1EAED]"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full border border-[#DDD9DF] bg-white/80 px-5 py-2.5 text-sm font-semibold text-[#504B52] transition hover:border-[#C7B8CE] hover:bg-[#F0EBF2]"
           >
-            ✨ Outfit Builder
+            Outfit Builder
           </a>
 
           <a
             href="/calendar"
-            className="shrink-0 rounded-full border border-[#DED5D8] bg-white px-5 py-2.5 text-sm font-semibold text-[#3A3035] transition hover:bg-[#F1EAED]"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full border border-[#DDD9DF] bg-white/80 px-5 py-2.5 text-sm font-semibold text-[#504B52] transition hover:border-[#C7B8CE] hover:bg-[#F0EBF2]"
           >
-            📅 Calendar
+            Calendar
+          </a>
+
+          <a
+            href="/looks"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full border border-[#DDD9DF] bg-white/80 px-5 py-2.5 text-sm font-semibold text-[#504B52] transition hover:border-[#C7B8CE] hover:bg-[#F0EBF2]"
+          >
+            Saved Looks
           </a>
         </nav>
 
-        {/* CATEGORY FILTERS */}
-        {clothes.length > 0 && (
-          <div className="mt-8">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#81777B]">
-              Browse your closet
-            </p>
+        {/* ================================================== */}
+        {/* FILTER PILLS */}
+        {/* ================================================== */}
 
+        {clothes.length > 0 && (
+          <section className="mt-8">
             <div className="flex gap-2 overflow-x-auto pb-2">
               {categories.map((category) => (
                 <button
                   key={category.name}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setActiveCategory(category.name);
                     setOpenMenu(null);
                   }}
                   className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold transition ${
                     activeCategory === category.name
-                      ? "bg-[#9B6AA8] text-white shadow-sm"
-                      : "border border-[#DED5D8] bg-white/80 text-[#5C5257] hover:border-[#C9B8C4] hover:bg-white"
+                      ? "bg-[#9A86A8] text-white shadow-sm"
+                      : "border border-[#DDD9DF] bg-white/80 text-[#625D63] hover:border-[#C7B8CE] hover:bg-[#F0EBF2]"
                   }`}
                 >
                   {category.name}
 
-                  <span
-                    className={`ml-1.5 text-xs ${
-                      activeCategory === category.name
-                        ? "text-white/75"
-                        : "text-[#9B6AA8]"
-                    }`}
-                  >
+                  <span className="ml-1.5 text-xs opacity-65">
                     {category.count}
                   </span>
                 </button>
               ))}
             </div>
-          </div>
+          </section>
         )}
 
-        {/* EMPTY WARDROBE */}
-        {clothes.length === 0 ? (
-          <div className="mt-10 rounded-[2rem] border border-[#E5DDE0] bg-white p-10 text-center shadow-sm">
-            <div className="text-5xl">👗</div>
+        {/* ================================================== */}
+        {/* EMPTY STATE */}
+        {/* ================================================== */}
 
-            <h2 className="mt-5 text-2xl font-bold">
+        {clothes.length === 0 ? (
+          <div className="mt-10 rounded-[1.8rem] border border-[#DFDDE1] bg-white/80 p-10 text-center shadow-[0_8px_30px_rgba(55,48,60,0.04)]">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#EAE4ED] text-2xl">
+              👗
+            </div>
+
+            <h2 className="mt-5 text-2xl font-bold text-[#29272B]">
               Your wardrobe is empty
             </h2>
 
-            <p className="mx-auto mt-2 max-w-md text-[#756C70]">
+            <p className="mx-auto mt-2 max-w-md text-[#777278]">
               Add your first clothing item and start building your digital
               wardrobe.
             </p>
 
             <a
               href="/add-clothes"
-              className="mt-6 inline-block rounded-full bg-[#3A3035] px-6 py-3 font-semibold text-white transition hover:scale-[1.02]"
+              onClick={(e) => e.stopPropagation()}
+              className="mt-6 inline-block rounded-full bg-[#29272B] px-6 py-3 font-semibold text-white shadow-sm transition hover:-translate-y-0.5"
             >
               Add Your First Item
             </a>
           </div>
-        ) : filteredClothes.length === 0 ? (
-          /* NO ITEMS IN FILTER */
-          <div className="mt-10 rounded-[2rem] border border-[#E5DDE0] bg-white p-10 text-center shadow-sm">
-            <div className="text-4xl">✨</div>
+        ) : activeCategory !== "All" ? (
+          /* ================================================== */
+          /* FILTERED CATEGORY VIEW */
+          /* ================================================== */
 
-            <h2 className="mt-4 text-xl font-bold">
-              Nothing here yet
-            </h2>
+          <section className="mt-9">
+            <div className="mb-5 flex items-end justify-between">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8F789F]">
+                  {filteredClothes.length} pieces
+                </p>
 
-            <p className="mt-2 text-sm text-[#756C70]">
-              You don't have any{" "}
-              {activeCategory.toLowerCase()} in your closet.
-            </p>
+                <h2 className="mt-1 text-2xl font-black tracking-tight">
+                  {activeCategory}
+                </h2>
+              </div>
 
-            <button
-              onClick={() => setActiveCategory("All")}
-              className="mt-5 rounded-full bg-[#3A3035] px-5 py-2.5 text-sm font-semibold text-white"
-            >
-              View All Pieces
-            </button>
-          </div>
-        ) : (
-          <>
-            {/* MOBILE COUNT */}
-            <div className="mt-7 sm:hidden">
-              <p className="text-sm font-semibold text-[#756C70]">
-                {filteredClothes.length}{" "}
-                {filteredClothes.length === 1 ? "piece" : "pieces"}
-
-                {activeCategory !== "All" &&
-                  ` · ${activeCategory}`}
-              </p>
+              <button
+                onClick={() => setActiveCategory("All")}
+                className="text-sm font-semibold text-[#8F789F] transition hover:text-[#725C7D]"
+              >
+                View all
+              </button>
             </div>
 
-            {/* CLOTHING GRID */}
-            <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 sm:gap-5 md:grid-cols-4 lg:grid-cols-5">
-
+            <div className="grid grid-cols-3 gap-x-3 gap-y-6 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-7">
               {filteredClothes.map((item) => {
                 const originalIndex = clothes.indexOf(item);
 
                 return (
-                  <div
+                  <ClothingCard
                     key={originalIndex}
-                    className="group relative"
-                  >
-                    {/* PHOTO */}
-                    <div className="relative overflow-hidden rounded-[1.4rem] bg-white shadow-sm transition duration-200 group-hover:-translate-y-1 group-hover:shadow-md">
-                      <img
-                        src={item.photo}
-                        alt={item.name}
-                        className="aspect-[4/5] w-full object-cover"
-                      />
-
-                      {/* THREE DOT MENU */}
-                      <div className="absolute right-2 top-2">
-                        <button
-                          onClick={() =>
-                            setOpenMenu(
-                              openMenu === originalIndex
-                                ? null
-                                : originalIndex
-                            )
-                          }
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-xl font-bold text-[#3A3035] shadow-sm backdrop-blur transition hover:bg-white"
-                          aria-label={`Options for ${item.name}`}
-                        >
-                          ⋮
-                        </button>
-
-                        {openMenu === originalIndex && (
-                          <div className="absolute right-0 z-10 mt-2 w-32 overflow-hidden rounded-2xl border border-[#E5DDE0] bg-white py-1 shadow-lg">
-                            <button
-                              className="w-full px-4 py-2.5 text-left text-sm font-medium text-[#3A3035] hover:bg-[#F7F3F0]"
-                              onClick={() => {
-                                setOpenMenu(null);
-                                alert("Edit feature coming soon!");
-                              }}
-                            >
-                              ✏️ Edit
-                            </button>
-
-                            <button
-                              className="w-full px-4 py-2.5 text-left text-sm font-medium text-red-600 hover:bg-red-50"
-                              onClick={() =>
-                                deleteClothing(originalIndex)
-                              }
-                            >
-                              🗑 Delete
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* ITEM INFO */}
-                    <div className="px-1 pt-3">
-                      <h3 className="truncate text-sm font-bold text-[#241F20]">
-                        {item.name || "Unnamed item"}
-                      </h3>
-
-                      <div className="mt-1 flex items-center gap-1.5 text-xs text-[#81777B]">
-                        {item.category && (
-                          <span>{item.category}</span>
-                        )}
-
-                        {item.category && item.color && (
-                          <span>•</span>
-                        )}
-
-                        {item.color && (
-                          <span>{item.color}</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                    item={item}
+                    originalIndex={originalIndex}
+                    openMenu={openMenu}
+                    setOpenMenu={setOpenMenu}
+                    deleteClothing={deleteClothing}
+                  />
                 );
               })}
-
-              {/* ADD PIECE CARD */}
-              {activeCategory === "All" && (
-                <a
-                  href="/add-clothes"
-                  className="group flex flex-col"
-                >
-                  <div className="flex aspect-[4/5] items-center justify-center rounded-[1.4rem] border border-dashed border-[#CDBFC5] bg-white/50 transition duration-200 group-hover:-translate-y-1 group-hover:border-[#9B6AA8] group-hover:bg-white group-hover:shadow-sm">
-                    <div className="text-center">
-                      <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#F1EAED] text-2xl text-[#9B6AA8] transition group-hover:scale-105">
-                        +
-                      </div>
-
-                      <p className="mt-3 text-sm font-bold text-[#3A3035]">
-                        Add piece
-                      </p>
-
-                      <p className="mt-1 text-xs text-[#81777B]">
-                        Grow your closet
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              )}
             </div>
-          </>
+          </section>
+        ) : (
+          /* ================================================== */
+          /* ALL CLOSET — CATEGORY RAILS */
+          /* ================================================== */
+
+          <div className="mt-9 space-y-10">
+            {categoryOrder.map((category) => {
+              const items = getCategoryItems(category.key);
+
+              if (items.length === 0) return null;
+
+              return (
+                <section key={category.key}>
+                  {/* CATEGORY HEADER */}
+
+                  <div className="mb-3 flex items-end justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#E9E3EC] text-sm">
+                        {category.emoji}
+                      </span>
+
+                      <div>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#8F789F]">
+                          {items.length}{" "}
+                          {items.length === 1 ? "piece" : "pieces"}
+                        </p>
+
+                        <h2 className="text-xl font-black tracking-tight text-[#29272B]">
+                          {category.label}
+                        </h2>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() =>
+                        setActiveCategory(category.label)
+                      }
+                      className="text-xs font-semibold text-[#777278] transition hover:text-[#8F789F]"
+                    >
+                      See all →
+                    </button>
+                  </div>
+
+                  {/* ================================================== */}
+                  {/* SMALL SQUARE CLOTHING RAIL */}
+                  {/* ================================================== */}
+
+                  <div className="flex gap-3 overflow-x-auto pb-3">
+                    {items.map((item) => {
+                      const originalIndex = clothes.indexOf(item);
+
+                      return (
+                        <div
+                          key={originalIndex}
+                          className="w-[92px] shrink-0 sm:w-[105px]"
+                        >
+                          <ClothingCard
+                            item={item}
+                            originalIndex={originalIndex}
+                            openMenu={openMenu}
+                            setOpenMenu={setOpenMenu}
+                            deleteClothing={deleteClothing}
+                          />
+                        </div>
+                      );
+                    })}
+
+                    {/* ADD PIECE CARD */}
+
+                    <a
+                      href="/add-clothes"
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-[92px] shrink-0 sm:w-[105px]"
+                    >
+                      <div className="flex aspect-square items-center justify-center rounded-[1rem] border border-dashed border-[#C9C1CD] bg-white/45 transition hover:border-[#9A86A8] hover:bg-white/75">
+                        <div className="text-center">
+                          <div className="mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-[#E9E2ED] text-lg font-light text-[#8F789F]">
+                            +
+                          </div>
+
+                          <p className="mt-2 text-[9px] font-bold text-[#504B52]">
+                            Add piece
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </section>
+              );
+            })}
+
+            {/* UNKNOWN ITEMS */}
+
+            {getCategoryItems("Top").length === 0 &&
+              getCategoryItems("Bottom").length === 0 &&
+              getCategoryItems("Dress").length === 0 &&
+              getCategoryItems("Shoes").length === 0 &&
+              getCategoryItems("Other").length === 0 && (
+                <div className="rounded-[1.8rem] bg-white/80 p-10 text-center">
+                  <p className="text-lg font-bold">
+                    No clothing pieces found
+                  </p>
+                </div>
+              )}
+          </div>
         )}
       </div>
     </main>
+  );
+}
+
+/* ================================================== */
+/* SUMMARY CARD */
+/* ================================================== */
+
+function SummaryCard({
+  label,
+  count,
+}: {
+  label: string;
+  count: number;
+}) {
+  return (
+    <div className="min-w-[72px] rounded-xl border border-[#E2DFE4] bg-[#F7F5F7] px-3 py-2.5">
+      <p className="text-base font-black text-[#29272B]">
+        {count}
+      </p>
+
+      <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#88828A]">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+/* ================================================== */
+/* CLOTHING CARD */
+/* ================================================== */
+
+function ClothingCard({
+  item,
+  originalIndex,
+  openMenu,
+  setOpenMenu,
+  deleteClothing,
+}: {
+  item: Clothing;
+  originalIndex: number;
+  openMenu: number | null;
+  setOpenMenu: (index: number | null) => void;
+  deleteClothing: (index: number) => void;
+}) {
+  return (
+    <div className="group relative">
+      {/* PHOTO */}
+
+      <div className="relative overflow-visible rounded-[1rem] bg-white">
+        <div className="overflow-hidden rounded-[1rem] border border-[#E2DFE4] bg-white shadow-[0_4px_18px_rgba(55,48,60,0.045)] transition duration-200 group-hover:-translate-y-1 group-hover:shadow-[0_8px_24px_rgba(55,48,60,0.08)]">
+          <img
+            src={item.photo}
+            alt={item.name}
+            className="aspect-square w-full object-cover"
+          />
+        </div>
+
+        {/* THREE DOT MENU */}
+
+        <div className="absolute right-1 top-1 z-20">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+
+              setOpenMenu(
+                openMenu === originalIndex
+                  ? null
+                  : originalIndex
+              );
+            }}
+            className="flex h-6 w-6 items-center justify-center rounded-full border border-white/80 bg-white/90 text-sm font-bold text-[#4B474D] shadow-sm backdrop-blur transition hover:bg-white"
+            aria-label={`Options for ${item.name}`}
+          >
+            ⋮
+          </button>
+
+          {openMenu === originalIndex && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="absolute right-0 mt-2 w-32 overflow-hidden rounded-xl border border-[#E0DCE2] bg-white py-1 shadow-[0_12px_30px_rgba(45,40,48,0.12)]"
+            >
+              <button
+                className="w-full px-4 py-2.5 text-left text-sm font-medium text-[#3F3B41] hover:bg-[#F4F1F5]"
+                onClick={() => {
+                  setOpenMenu(null);
+                  alert("Edit feature coming soon!");
+                }}
+              >
+                ✏️ Edit
+              </button>
+
+              <button
+                className="w-full px-4 py-2.5 text-left text-sm font-medium text-red-600 hover:bg-red-50"
+                onClick={() =>
+                  deleteClothing(originalIndex)
+                }
+              >
+                🗑 Delete
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ITEM INFO */}
+
+      <div className="px-0.5 pt-1.5">
+        <h3 className="truncate text-[10px] font-bold text-[#29272B]">
+          {item.name || "Unnamed item"}
+        </h3>
+
+        <div className="mt-0.5 flex items-center gap-0.5 text-[8px] text-[#88828A]">
+          {item.color && <span>{item.color}</span>}
+
+          {item.color && item.category && (
+            <span>•</span>
+          )}
+
+          {item.category && (
+            <span>{item.category}</span>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

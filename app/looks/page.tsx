@@ -44,228 +44,304 @@ export default function LooksPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F7F3F0] px-4 py-6 text-[#241F20] sm:px-6 sm:py-8">
-      <div className="mx-auto max-w-6xl">
+    <main
+      onClick={() => setOpenMenu(null)}
+      className="relative min-h-screen overflow-hidden bg-[#F3F2F4] text-[#29272B]"
+    >
+      {/* ================================================== */}
+      {/* SUBTLE GLITTER BACKGROUND */}
+      {/* ================================================== */}
 
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 5% 8%, rgba(151,126,166,0.38) 0 2px, transparent 3px),
+            radial-gradient(circle at 14% 19%, rgba(255,255,255,0.95) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 25% 7%, rgba(151,126,166,0.30) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 37% 17%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+            radial-gradient(circle at 49% 6%, rgba(151,126,166,0.35) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 61% 21%, rgba(255,255,255,0.95) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 73% 9%, rgba(151,126,166,0.35) 0 2px, transparent 3px),
+            radial-gradient(circle at 87% 18%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+
+            radial-gradient(circle at 8% 42%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 21% 55%, rgba(151,126,166,0.30) 0 2px, transparent 3px),
+            radial-gradient(circle at 34% 39%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 48% 52%, rgba(151,126,166,0.32) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 66% 42%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+            radial-gradient(circle at 79% 57%, rgba(151,126,166,0.32) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 92% 43%, rgba(255,255,255,0.95) 0 1.5px, transparent 3px),
+
+            radial-gradient(circle at 6% 78%, rgba(151,126,166,0.32) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 19% 91%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+            radial-gradient(circle at 33% 76%, rgba(151,126,166,0.30) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 52% 89%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 68% 77%, rgba(151,126,166,0.34) 0 2px, transparent 3px),
+            radial-gradient(circle at 83% 91%, rgba(255,255,255,0.9) 0 1.5px, transparent 3px)
+          `,
+        }}
+      />
+
+      <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-5 sm:px-6 sm:pt-8">
+
+        {/* ================================================== */}
         {/* HEADER */}
+        {/* ================================================== */}
+
         <header className="flex items-center justify-between">
           <a
             href="/"
-            className="text-2xl font-black tracking-tight"
+            onClick={(e) => e.stopPropagation()}
+            className="text-2xl font-black tracking-[-0.06em] text-[#29272B] sm:text-3xl"
           >
-            vestia<span className="text-[#9B6AA8]">.</span>
+            vestia<span className="text-[#9A86A8]">.</span>
           </a>
 
           <a
             href="/outfits"
-            className="rounded-full bg-[#3A3035] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:scale-[1.02]"
+            onClick={(e) => e.stopPropagation()}
+            className="rounded-full bg-[#29272B] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#38343A]"
           >
             + Create Look
           </a>
         </header>
 
+        {/* ================================================== */}
         {/* TITLE */}
-        <section className="mt-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9B6AA8]">
+        {/* ================================================== */}
+
+        <section className="mt-9 sm:mt-12">
+          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#8F789F]">
             Your style collection
           </p>
 
           <div className="mt-2 flex items-end justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-black tracking-tight sm:text-5xl">
+              <h1 className="text-4xl font-black tracking-[-0.055em] text-[#29272B] sm:text-5xl">
                 My Looks
               </h1>
 
-              <p className="mt-2 max-w-xl text-sm text-[#756C70] sm:text-base">
+              <p className="mt-2 max-w-xl text-sm text-[#777278] sm:text-base">
                 All the outfits you've created, saved in one place.
               </p>
             </div>
 
             {savedOutfits.length > 0 && (
-              <p className="hidden text-sm font-semibold text-[#756C70] sm:block">
+              <div className="hidden rounded-full border border-[#DEDADF] bg-white/80 px-4 py-2 text-sm font-semibold text-[#4B474D] shadow-sm sm:block">
                 {savedOutfits.length}{" "}
                 {savedOutfits.length === 1 ? "look" : "looks"}
-              </p>
+              </div>
             )}
           </div>
         </section>
 
+        {/* ================================================== */}
         {/* NAVIGATION */}
+        {/* ================================================== */}
+
         <nav className="mt-7 flex gap-2 overflow-x-auto pb-1">
           <a
             href="/wardrobe"
-            className="shrink-0 rounded-full border border-[#DED5D8] bg-white px-5 py-2.5 text-sm font-semibold text-[#3A3035] transition hover:bg-[#F1EAED]"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full border border-[#DDD9DF] bg-white/80 px-5 py-2.5 text-sm font-semibold text-[#504B52] transition hover:border-[#C7B8CE] hover:bg-[#F0EBF2]"
           >
-            👗 Wardrobe
+            Wardrobe
           </a>
 
           <a
             href="/outfits"
-            className="shrink-0 rounded-full border border-[#DED5D8] bg-white px-5 py-2.5 text-sm font-semibold text-[#3A3035] transition hover:bg-[#F1EAED]"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full border border-[#DDD9DF] bg-white/80 px-5 py-2.5 text-sm font-semibold text-[#504B52] transition hover:border-[#C7B8CE] hover:bg-[#F0EBF2]"
           >
-            ✨ Build Look
+            Build Look
           </a>
 
           <a
             href="/looks"
-            className="shrink-0 rounded-full bg-[#3A3035] px-5 py-2.5 text-sm font-semibold text-white"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full bg-[#29272B] px-5 py-2.5 text-sm font-semibold text-white shadow-sm"
           >
-            💖 My Looks
+            My Looks
           </a>
 
           <a
             href="/calendar"
-            className="shrink-0 rounded-full border border-[#DED5D8] bg-white px-5 py-2.5 text-sm font-semibold text-[#3A3035] transition hover:bg-[#F1EAED]"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 rounded-full border border-[#DDD9DF] bg-white/80 px-5 py-2.5 text-sm font-semibold text-[#504B52] transition hover:border-[#C7B8CE] hover:bg-[#F0EBF2]"
           >
-            📅 Calendar
+            Calendar
           </a>
         </nav>
 
+        {/* ================================================== */}
         {/* EMPTY STATE */}
+        {/* ================================================== */}
+
         {savedOutfits.length === 0 ? (
-          <section className="mt-10 rounded-[2rem] border border-[#E5DDE0] bg-white p-10 text-center shadow-sm">
-            <div className="text-5xl">✨</div>
+          <section className="mt-10 rounded-[1.8rem] border border-[#DFDDE1] bg-white/80 p-10 text-center shadow-[0_8px_30px_rgba(55,48,60,0.04)]">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E9E2ED] text-xl text-[#8F789F]">
+              ✦
+            </div>
 
             <h2 className="mt-5 text-2xl font-black">
               No looks yet
             </h2>
 
-            <p className="mx-auto mt-2 max-w-md text-sm text-[#756C70]">
+            <p className="mx-auto mt-2 max-w-md text-sm text-[#777278]">
               Build your first outfit and save it here to start your
               personal style collection.
             </p>
 
             <a
               href="/outfits"
-              className="mt-6 inline-block rounded-full bg-[#3A3035] px-6 py-3 text-sm font-bold text-white"
+              onClick={(e) => e.stopPropagation()}
+              className="mt-6 inline-block rounded-full bg-[#29272B] px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              Create Your First Look ✨
+              Create Your First Look
             </a>
           </section>
         ) : (
           <>
             {/* MOBILE COUNT */}
+
             <div className="mt-7 sm:hidden">
-              <p className="text-sm font-semibold text-[#756C70]">
+              <p className="text-xs font-semibold text-[#777278]">
                 {savedOutfits.length}{" "}
                 {savedOutfits.length === 1 ? "look" : "looks"}
               </p>
             </div>
 
-            {/* LOOK GRID */}
-            <section className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
+            {/* ================================================== */}
+            {/* SMALL LOOK GRID */}
+            {/* ================================================== */}
+
+            <section className="mt-6 grid grid-cols-3 gap-x-3 gap-y-7 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
 
               {savedOutfits.map((outfit) => (
                 <article
                   key={outfit.id}
-                  className="group relative overflow-hidden rounded-[1.5rem] border border-[#E5DDE0] bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md"
+                  className="group relative"
                 >
+                  {/* OUTFIT PHOTO */}
 
-                  {/* OUTFIT IMAGES */}
-                  <div className="grid grid-cols-3 gap-0.5 bg-[#F7F3F0]">
+                  <div className="relative overflow-visible rounded-[1rem] bg-white">
 
-                    <img
-                      src={outfit.top.photo}
-                      alt={outfit.top.name}
-                      className="aspect-[3/4] w-full object-cover"
-                    />
+                    <div className="grid aspect-square grid-cols-3 gap-0.5 overflow-hidden rounded-[1rem] border border-[#E2DFE4] bg-[#ECEAED] shadow-[0_4px_18px_rgba(55,48,60,0.045)] transition duration-200 group-hover:-translate-y-1 group-hover:shadow-[0_8px_24px_rgba(55,48,60,0.08)]">
 
-                    <img
-                      src={outfit.bottom.photo}
-                      alt={outfit.bottom.name}
-                      className="aspect-[3/4] w-full object-cover"
-                    />
+                      <img
+                        src={outfit.top.photo}
+                        alt={outfit.top.name}
+                        className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.01]"
+                      />
 
-                    <img
-                      src={outfit.shoes.photo}
-                      alt={outfit.shoes.name}
-                      className="aspect-[3/4] w-full object-cover"
-                    />
+                      <img
+                        src={outfit.bottom.photo}
+                        alt={outfit.bottom.name}
+                        className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.01]"
+                      />
 
+                      <img
+                        src={outfit.shoes.photo}
+                        alt={outfit.shoes.name}
+                        className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.01]"
+                      />
+
+                    </div>
+
+                    {/* THREE DOT MENU */}
+
+                    <div className="absolute right-1 top-1 z-20">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+
+                          setOpenMenu(
+                            openMenu === outfit.id
+                              ? null
+                              : outfit.id
+                          );
+                        }}
+                        className="flex h-6 w-6 items-center justify-center rounded-full border border-white/80 bg-white/90 text-sm font-bold text-[#4B474D] shadow-sm backdrop-blur transition hover:bg-white"
+                        aria-label={`Options for ${outfit.name}`}
+                      >
+                        ⋮
+                      </button>
+
+                      {openMenu === outfit.id && (
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="absolute right-0 mt-2 w-32 overflow-hidden rounded-xl border border-[#E0DCE2] bg-white py-1 shadow-[0_12px_30px_rgba(45,40,48,0.12)]"
+                        >
+                          <button
+                            onClick={() => {
+                              setOpenMenu(null);
+                              alert("Edit feature coming soon!");
+                            }}
+                            className="w-full px-4 py-2.5 text-left text-sm font-medium text-[#3F3B41] hover:bg-[#F4F1F5]"
+                          >
+                            ✏️ Edit
+                          </button>
+
+                          <button
+                            onClick={() =>
+                              deleteOutfit(outfit.id)
+                            }
+                            className="w-full px-4 py-2.5 text-left text-sm font-medium text-red-600 hover:bg-red-50"
+                          >
+                            🗑 Delete
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  {/* MENU */}
-                  <div className="absolute right-2 top-2">
-                    <button
-                      onClick={() =>
-                        setOpenMenu(
-                          openMenu === outfit.id
-                            ? null
-                            : outfit.id
-                        )
-                      }
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-xl font-bold text-[#3A3035] shadow-sm backdrop-blur"
-                      aria-label={`Options for ${outfit.name}`}
-                    >
-                      ⋮
-                    </button>
+                  {/* ================================================== */}
+                  {/* LOOK INFO */}
+                  {/* ================================================== */}
 
-                    {openMenu === outfit.id && (
-                      <div className="absolute right-0 z-10 mt-2 w-32 overflow-hidden rounded-2xl border border-[#E5DDE0] bg-white py-1 shadow-lg">
-
-                        <button
-                          onClick={() => {
-                            setOpenMenu(null);
-                            alert("Edit feature coming soon!");
-                          }}
-                          className="w-full px-4 py-2.5 text-left text-sm font-medium hover:bg-[#F7F3F0]"
-                        >
-                          ✏️ Edit
-                        </button>
-
-                        <button
-                          onClick={() =>
-                            deleteOutfit(outfit.id)
-                          }
-                          className="w-full px-4 py-2.5 text-left text-sm font-medium text-red-600 hover:bg-red-50"
-                        >
-                          🗑 Delete
-                        </button>
-
-                      </div>
-                    )}
-                  </div>
-
-                  {/* INFO */}
-                  <div className="p-4">
-
-                    <div className="flex items-center justify-between gap-2">
-                      <h2 className="truncate text-sm font-black sm:text-base">
-                        {outfit.name}
+                  <div className="px-0.5 pt-1.5">
+                    <div className="flex items-center gap-1">
+                      <h2 className="truncate text-[10px] font-bold text-[#29272B]">
+                        {outfit.name || "Untitled look"}
                       </h2>
 
-                      <span className="shrink-0 text-xs text-[#9B6AA8]">
-                        ✨
+                      <span className="shrink-0 text-[8px] text-[#9A86A8]">
+                        ✦
                       </span>
                     </div>
 
-                    <p className="mt-1 truncate text-xs text-[#81777B]">
+                    <p className="mt-0.5 truncate text-[8px] text-[#88828A]">
                       {outfit.top.name} · {outfit.bottom.name}
                     </p>
-
                   </div>
-
                 </article>
               ))}
 
-              {/* CREATE NEW LOOK CARD */}
+              {/* ================================================== */}
+              {/* CREATE NEW LOOK */}
+              {/* ================================================== */}
+
               <a
                 href="/outfits"
-                className="group flex min-h-[220px] items-center justify-center rounded-[1.5rem] border border-dashed border-[#CDBFC5] bg-white/50 transition duration-200 hover:-translate-y-1 hover:border-[#9B6AA8] hover:bg-white hover:shadow-sm"
+                onClick={(e) => e.stopPropagation()}
+                className="group"
               >
-                <div className="text-center">
+                <div className="flex aspect-square items-center justify-center rounded-[1rem] border border-dashed border-[#C9C1CD] bg-white/45 transition duration-200 hover:-translate-y-1 hover:border-[#9A86A8] hover:bg-white/75">
 
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#F1EAED] text-2xl text-[#9B6AA8] transition group-hover:scale-105">
-                    +
+                  <div className="text-center px-2">
+                    <div className="mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-[#E9E2ED] text-lg font-light text-[#8F789F] transition duration-200 group-hover:scale-110">
+                      +
+                    </div>
+
+                    <p className="mt-2 text-[9px] font-bold text-[#504B52]">
+                      New look
+                    </p>
+
+                    <p className="mt-0.5 text-[7px] text-[#88828A]">
+                      Mix & match
+                    </p>
                   </div>
-
-                  <p className="mt-3 text-sm font-black">
-                    Create a new look
-                  </p>
-
-                  <p className="mt-1 text-xs text-[#81777B]">
-                    Mix & match your closet
-                  </p>
 
                 </div>
               </a>
@@ -273,7 +349,6 @@ export default function LooksPage() {
             </section>
           </>
         )}
-
       </div>
     </main>
   );
