@@ -117,6 +117,7 @@ export default function OutfitsPage() {
 
         {/* NAVIGATION */}
         <nav className="mt-7 flex gap-2 overflow-x-auto pb-1">
+
           <a
             href="/wardrobe"
             className="shrink-0 rounded-full border border-[#DED5D8] bg-white px-5 py-2.5 text-sm font-semibold text-[#3A3035] transition hover:bg-[#F1EAED]"
@@ -144,6 +145,7 @@ export default function OutfitsPage() {
           >
             📅 Calendar
           </a>
+
         </nav>
 
         {/* BUILDER */}
@@ -153,6 +155,7 @@ export default function OutfitsPage() {
           <div className="rounded-[2rem] border border-[#E5DDE0] bg-white p-5 shadow-sm sm:p-7">
 
             <div className="flex items-end justify-between gap-4">
+
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#9B6AA8]">
                   Create
@@ -166,16 +169,20 @@ export default function OutfitsPage() {
               <span className="hidden rounded-full bg-[#F1EAED] px-3 py-1.5 text-xs font-semibold text-[#6E5969] sm:block">
                 Mix & match ✨
               </span>
+
             </div>
 
             {/* TOP */}
             <div className="mt-7">
+
               <div className="mb-3 flex items-center gap-3">
+
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F1EAED] text-xs font-black text-[#9B6AA8]">
                   01
                 </span>
 
                 <div>
+
                   <h3 className="text-sm font-black uppercase tracking-[0.12em]">
                     Pick a top
                   </h3>
@@ -185,11 +192,15 @@ export default function OutfitsPage() {
                       {selectedTop.name}
                     </p>
                   )}
+
                 </div>
+
               </div>
 
               <div className="flex gap-3 overflow-x-auto pb-2">
+
                 {tops.map((item, index) => (
+
                   <button
                     key={index}
                     onClick={() => setSelectedTop(item)}
@@ -199,6 +210,7 @@ export default function OutfitsPage() {
                         : "hover:-translate-y-1"
                     }`}
                   >
+
                     <div
                       className={`relative overflow-hidden rounded-2xl bg-[#F7F3F0] p-1 transition ${
                         selectedTop === item
@@ -206,6 +218,7 @@ export default function OutfitsPage() {
                           : "border border-[#E5DDE0]"
                       }`}
                     >
+
                       <img
                         src={item.photo}
                         alt={item.name}
@@ -217,6 +230,7 @@ export default function OutfitsPage() {
                           ✓
                         </div>
                       )}
+
                     </div>
 
                     <p className="mt-2 truncate px-1 text-xs font-bold">
@@ -228,7 +242,9 @@ export default function OutfitsPage() {
                         {item.color}
                       </p>
                     )}
+
                   </button>
+
                 ))}
 
                 {tops.length === 0 && (
@@ -238,17 +254,22 @@ export default function OutfitsPage() {
                     Add one from your wardrobe.
                   </div>
                 )}
+
               </div>
+
             </div>
 
             {/* BOTTOM */}
             <div className="mt-8">
+
               <div className="mb-3 flex items-center gap-3">
+
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F1EAED] text-xs font-black text-[#9B6AA8]">
                   02
                 </span>
 
                 <div>
+
                   <h3 className="text-sm font-black uppercase tracking-[0.12em]">
                     Pick a bottom
                   </h3>
@@ -258,11 +279,15 @@ export default function OutfitsPage() {
                       {selectedBottom.name}
                     </p>
                   )}
+
                 </div>
+
               </div>
 
               <div className="flex gap-3 overflow-x-auto pb-2">
+
                 {bottoms.map((item, index) => (
+
                   <button
                     key={index}
                     onClick={() => setSelectedBottom(item)}
@@ -272,6 +297,7 @@ export default function OutfitsPage() {
                         : "hover:-translate-y-1"
                     }`}
                   >
+
                     <div
                       className={`relative overflow-hidden rounded-2xl bg-[#F7F3F0] p-1 transition ${
                         selectedBottom === item
@@ -279,6 +305,7 @@ export default function OutfitsPage() {
                           : "border border-[#E5DDE0]"
                       }`}
                     >
+
                       <img
                         src={item.photo}
                         alt={item.name}
@@ -290,6 +317,7 @@ export default function OutfitsPage() {
                           ✓
                         </div>
                       )}
+
                     </div>
 
                     <p className="mt-2 truncate px-1 text-xs font-bold">
@@ -301,7 +329,9 @@ export default function OutfitsPage() {
                         {item.color}
                       </p>
                     )}
+
                   </button>
+
                 ))}
 
                 {bottoms.length === 0 && (
@@ -311,17 +341,22 @@ export default function OutfitsPage() {
                     Add one from your wardrobe.
                   </div>
                 )}
+
               </div>
+
             </div>
 
             {/* SHOES */}
             <div className="mt-8">
+
               <div className="mb-3 flex items-center gap-3">
+
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F1EAED] text-xs font-black text-[#9B6AA8]">
                   03
                 </span>
 
                 <div>
+
                   <h3 className="text-sm font-black uppercase tracking-[0.12em]">
                     Pick your shoes
                   </h3>
@@ -331,11 +366,15 @@ export default function OutfitsPage() {
                       {selectedShoes.name}
                     </p>
                   )}
+
                 </div>
+
               </div>
 
               <div className="flex gap-3 overflow-x-auto pb-2">
+
                 {shoes.map((item, index) => (
+
                   <button
                     key={index}
                     onClick={() => setSelectedShoes(item)}
@@ -345,6 +384,7 @@ export default function OutfitsPage() {
                         : "hover:-translate-y-1"
                     }`}
                   >
+
                     <div
                       className={`relative overflow-hidden rounded-2xl bg-[#F7F3F0] p-1 transition ${
                         selectedShoes === item
@@ -352,6 +392,7 @@ export default function OutfitsPage() {
                           : "border border-[#E5DDE0]"
                       }`}
                     >
+
                       <img
                         src={item.photo}
                         alt={item.name}
@@ -363,6 +404,7 @@ export default function OutfitsPage() {
                           ✓
                         </div>
                       )}
+
                     </div>
 
                     <p className="mt-2 truncate px-1 text-xs font-bold">
@@ -374,7 +416,9 @@ export default function OutfitsPage() {
                         {item.color}
                       </p>
                     )}
+
                   </button>
+
                 ))}
 
                 {shoes.length === 0 && (
@@ -384,18 +428,25 @@ export default function OutfitsPage() {
                     Add some from your wardrobe.
                   </div>
                 )}
+
               </div>
+
             </div>
 
           </div>
 
           {/* YOUR LOOK */}
           <div className="lg:sticky lg:top-6 lg:self-start">
+
             <section className="overflow-hidden rounded-[2rem] border border-[#E5DDE0] bg-white shadow-sm">
 
+              {/* PREVIEW TITLE */}
               <div className="px-5 pt-6 sm:px-7 sm:pt-7">
+
                 <div className="flex items-center justify-between">
+
                   <div>
+
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#9B6AA8]">
                       Outfit
                     </p>
@@ -403,63 +454,149 @@ export default function OutfitsPage() {
                     <h2 className="mt-1 text-2xl font-black tracking-tight">
                       Your Look
                     </h2>
+
                   </div>
 
                   <span className="rounded-full bg-[#F1EAED] px-3 py-1.5 text-xs font-semibold text-[#6E5969]">
                     Preview
                   </span>
+
                 </div>
+
               </div>
 
-              {/* PREVIEW */}
-              <div className="mx-5 mt-5 flex min-h-[400px] flex-col items-center justify-center gap-2 rounded-[1.5rem] bg-[#F7F3F0] p-5 sm:mx-7 sm:mt-6">
+              {/* DRESSING ROOM PREVIEW */}
+              <div className="mx-5 mt-5 overflow-hidden rounded-[1.5rem] bg-[#F7F3F0] sm:mx-7 sm:mt-6">
 
-                {selectedTop ? (
-                  <img
-                    src={selectedTop.photo}
-                    alt={selectedTop.name}
-                    className="h-28 w-28 rounded-2xl object-cover shadow-sm transition duration-300"
-                  />
-                ) : (
-                  <div className="flex h-28 w-28 items-center justify-center rounded-2xl border border-dashed border-[#CDBFC5] bg-white text-center text-xs text-[#81777B]">
-                    👚
-                    <br />
-                    Pick a top
-                  </div>
-                )}
+                {/* PREVIEW HEADER */}
+                <div className="flex items-center justify-between px-4 pt-4">
 
-                {selectedBottom ? (
-                  <img
-                    src={selectedBottom.photo}
-                    alt={selectedBottom.name}
-                    className="h-28 w-28 rounded-2xl object-cover shadow-sm transition duration-300"
-                  />
-                ) : (
-                  <div className="flex h-28 w-28 items-center justify-center rounded-2xl border border-dashed border-[#CDBFC5] bg-white text-center text-xs text-[#81777B]">
-                    👖
-                    <br />
-                    Pick a bottom
-                  </div>
-                )}
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#81777B]">
+                    Dressing room
+                  </p>
 
-                {selectedShoes ? (
-                  <img
-                    src={selectedShoes.photo}
-                    alt={selectedShoes.name}
-                    className="h-20 w-20 rounded-2xl object-cover shadow-sm transition duration-300"
-                  />
-                ) : (
-                  <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-dashed border-[#CDBFC5] bg-white text-center text-xs text-[#81777B]">
-                    👟
-                    <br />
-                    Shoes
+                  <span className="text-xs text-[#9B6AA8]">
+                    {selectedTop &&
+                    selectedBottom &&
+                    selectedShoes
+                      ? "Look complete ✨"
+                      : "Keep styling..."}
+                  </span>
+
+                </div>
+
+                {/* OUTFIT */}
+                <div className="flex min-h-[390px] items-center justify-center px-5 py-7">
+
+                  <div className="flex flex-col items-center">
+
+                    {/* TOP */}
+                    <div className="relative">
+
+                      {selectedTop ? (
+                        <img
+                          src={selectedTop.photo}
+                          alt={selectedTop.name}
+                          className="h-36 w-36 rounded-[1.4rem] object-cover shadow-md transition duration-300"
+                        />
+                      ) : (
+                        <div className="flex h-36 w-36 items-center justify-center rounded-[1.4rem] border border-dashed border-[#CDBFC5] bg-white text-center text-xs text-[#81777B]">
+                          👚
+                          <br />
+                          Pick a top
+                        </div>
+                      )}
+
+                      {selectedTop && (
+                        <span className="absolute -right-2 -top-2 rounded-full bg-white px-2 py-1 text-[10px] font-bold text-[#9B6AA8] shadow-sm">
+                          TOP
+                        </span>
+                      )}
+
+                    </div>
+
+                    {/* CONNECTION */}
+                    <div className="h-3 w-px bg-[#D8CDD1]" />
+
+                    {/* BOTTOM */}
+                    <div className="relative">
+
+                      {selectedBottom ? (
+                        <img
+                          src={selectedBottom.photo}
+                          alt={selectedBottom.name}
+                          className="h-32 w-32 rounded-[1.4rem] object-cover shadow-md transition duration-300"
+                        />
+                      ) : (
+                        <div className="flex h-32 w-32 items-center justify-center rounded-[1.4rem] border border-dashed border-[#CDBFC5] bg-white text-center text-xs text-[#81777B]">
+                          👖
+                          <br />
+                          Pick a bottom
+                        </div>
+                      )}
+
+                      {selectedBottom && (
+                        <span className="absolute -right-2 -top-2 rounded-full bg-white px-2 py-1 text-[10px] font-bold text-[#9B6AA8] shadow-sm">
+                          BOTTOM
+                        </span>
+                      )}
+
+                    </div>
+
+                    {/* CONNECTION */}
+                    <div className="h-3 w-px bg-[#D8CDD1]" />
+
+                    {/* SHOES */}
+                    <div className="relative">
+
+                      {selectedShoes ? (
+                        <img
+                          src={selectedShoes.photo}
+                          alt={selectedShoes.name}
+                          className="h-20 w-20 rounded-[1.2rem] object-cover shadow-md transition duration-300"
+                        />
+                      ) : (
+                        <div className="flex h-20 w-20 items-center justify-center rounded-[1.2rem] border border-dashed border-[#CDBFC5] bg-white text-center text-[10px] text-[#81777B]">
+                          👟
+                          <br />
+                          Shoes
+                        </div>
+                      )}
+
+                      {selectedShoes && (
+                        <span className="absolute -right-3 -top-2 rounded-full bg-white px-2 py-1 text-[10px] font-bold text-[#9B6AA8] shadow-sm">
+                          SHOES
+                        </span>
+                      )}
+
+                    </div>
+
                   </div>
-                )}
+
+                </div>
+
+                {/* COMPLETION MESSAGE */}
+                {selectedTop &&
+                  selectedBottom &&
+                  selectedShoes && (
+                    <div className="mx-4 mb-4 rounded-2xl bg-white px-4 py-3 text-center shadow-sm">
+
+                      <p className="text-sm font-black">
+                        Your look is ready ✨
+                      </p>
+
+                      <p className="mt-0.5 text-xs text-[#81777B]">
+                        Give it a name and save it to My Looks.
+                      </p>
+
+                    </div>
+                  )}
 
               </div>
 
               {/* NAME + SAVE */}
               <div className="p-5 sm:p-7">
+
                 <label className="text-xs font-bold uppercase tracking-[0.14em] text-[#81777B]">
                   Name your look
                 </label>
@@ -478,15 +615,18 @@ export default function OutfitsPage() {
                 >
                   Save Look ✨
                 </button>
+
               </div>
 
             </section>
+
           </div>
 
         </section>
 
-        {/* LINK TO SAVED LOOKS */}
+        {/* SAVED LOOKS LINK */}
         <div className="mt-8 text-center">
+
           <a
             href="/looks"
             className="inline-flex items-center gap-2 rounded-full border border-[#DED5D8] bg-white px-5 py-3 text-sm font-bold text-[#3A3035] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#F1EAED]"
@@ -494,6 +634,7 @@ export default function OutfitsPage() {
             View My Saved Looks
             <span className="text-[#9B6AA8]">→</span>
           </a>
+
         </div>
 
       </div>
